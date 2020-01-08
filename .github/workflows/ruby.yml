@@ -1,0 +1,47 @@
+name: RedCloth
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: >-
+      Ruby: ${{ matrix.ruby }} OS: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-18.04', 'macos', 'windows-latest' ]
+        ruby: [ '2.3', '2.4', '2.5', '2.6', '2.7' ]
+    steps:
+    - name: repo checkout
+      uses: actions/checkout@v2
+
+    - name: Ruby Install
+      uses: eregon/use-ruby-action@master
+      with:
+        ruby-version: ${{ matrix.ruby }}
+
+    - name: ubuntu & macos - install ragel
+      if:   startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
+      run:  |
+        if [ "${{ matrix.os }}" == "macos" ]; then
+          brew install ragel
+        else
+          sudo apt-get install ragel
+        fi
+    - name: windows - update MSYS2, ragel
+      if:   startsWith(matrix.os, 'windows')
+      uses: MSP-Greg/msys2-action@master
+      with:
+        base:  update
+        mingw: ragel
+
+    - name: RubyGems, Bundler Update
+      run:  gem update --system --no-document --conservative
+    - name: bundle install
+      run:  bundle install --jobs 4 --retry 3
+    - name: compile
+      run:  bundle exec rake compile
+    - name: test
+      run:  bundle exec rake test
+      timeout-minutes: 10
