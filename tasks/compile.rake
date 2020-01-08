@@ -1,3 +1,7 @@
+if /mingw/ ~= RUBY_PLATFORM
+  require 'devkit'
+end
+
 CLEAN.include [
   'tmp',
   '**/*.{o,obj,class,pdb,lib,def,exp,log,rbc}',

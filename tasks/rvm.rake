@@ -1,4 +1,4 @@
-if RUBY_PLATFORM !~ /mingw/ or ENV['GITHUB_ACTIONS'].nil?
+if !ENV.key?('GITHUB_ACTIONS') or /mingw/ ~= RUBY_PLATFORM
 require 'rvm'
 
 namespace :rvm do
