@@ -1,4 +1,4 @@
-unless ENV.key?('GITHUB_ACTIONS') or /mingw/ =~ RUBY_PLATFORM
+unless ENV.key?('GITHUB_ACTIONS') or (/mingw/ =~ RUBY_PLATFORM)
 require 'rvm'
 
 namespace :rvm do
