@@ -1,3 +1,4 @@
+if RUBY_PLATFORM !~ /mingw/
 require 'rvm'
 
 namespace :rvm do
@@ -78,4 +79,4 @@ end
 def rvm_rubies(options={})
   RVM_RUBIES.map{ |rubie| "#{rubie}@#{RVM_GEMSET_NAME}" }
 end
-
+end

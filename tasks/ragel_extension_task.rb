@@ -31,6 +31,7 @@ module Rake
         file target(machine) => [*ragel_sources(machine)] do
           mkdir_p(File.dirname(target(machine))) unless File.directory?(File.dirname(target(machine)))
           ensure_ragel_version
+STDOUT.puts "*** ragel #{flags} #{lang_ragel(machine)} -o #{target(machine)}", "*** #{Dir.pwd}"
           sh "ragel #{flags} #{lang_ragel(machine)} -o #{target(machine)}"
         end
         

@@ -11,10 +11,8 @@ Gem::Specification.new do |s|
   s.summary     = RedCloth::SUMMARY
   s.email       = "redcloth-upwards@rubyforge.org"
   s.homepage    = "http://redcloth.org"
-  s.rubyforge_project = "redcloth"
 
   s.rubygems_version   = "1.3.7"
-  s.default_executable = "redcloth"
 
   s.files            = Dir['.gemtest', '.rspec', 'CHANGELOG', 'COPYING', 'Gemfile', 'README.rdoc', 'Rakefile', 'doc/**/*', 'bin/**/*', 'lib/**/*', 'redcloth.gemspec', 'spec/**/*', 'tasks/**/*']
   s.test_files       = Dir['spec/**/*']
@@ -33,9 +31,9 @@ Gem::Specification.new do |s|
   s.extensions = Dir['ext/**/extconf.rb']
 
   s.add_development_dependency('bundler', '> 1.3.4')
-  s.add_development_dependency('rake', '~> 10.0.3')
-  s.add_development_dependency('rspec', '~> 2.4')
-  s.add_development_dependency('diff-lcs', '~> 1.1.2')
+  s.add_development_dependency('rake', '>= 10.0.3')
+  s.add_development_dependency('rspec', '>= 2.4')
+  s.add_development_dependency('diff-lcs', '>= 1.1.2')
 
   s.license = "MIT"
 end

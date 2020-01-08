@@ -5,12 +5,8 @@
 # appears to be fixed in Edge Rails [51e4106].
 Object.send(:remove_const, :RedCloth) if Object.const_defined?(:RedCloth) && RedCloth.is_a?(Class)
 
-require 'rbconfig'
 begin
-  conf = Object.const_get(defined?(RbConfig) ? :RbConfig : :Config)::CONFIG
-  prefix = conf['arch'] =~ /mswin|mingw/ ? "#{conf['MAJOR']}.#{conf['MINOR']}/" : ''
-  lib = "#{prefix}redcloth_scan"
-  require lib
+  require "redcloth_scan"
 rescue LoadError => e
   e.message << %{\nCouldn't load #{lib}\nThe $LOAD_PATH was:\n#{$LOAD_PATH.join("\n")}}
   raise e
