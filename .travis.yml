@@ -4,6 +4,7 @@ sudo: false
 rvm:
   - 2.3
   - 2.2
+  - 2.1
   - 2.0
   - 1.9.3
 matrix:
@@ -14,3 +15,4 @@ compiler:
 before_script:
   - bundle update
   - bundle exec rake clobber
+  - ruby -v
