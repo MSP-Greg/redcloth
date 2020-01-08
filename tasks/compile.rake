@@ -1,4 +1,4 @@
-if /mingw/ ~= RUBY_PLATFORM
+if /mingw/ =~ RUBY_PLATFORM
   require 'devkit'
 end
 
