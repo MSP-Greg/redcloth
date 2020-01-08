@@ -31,8 +31,13 @@ module Rake
         file target(machine) => [*ragel_sources(machine)] do
           mkdir_p(File.dirname(target(machine))) unless File.directory?(File.dirname(target(machine)))
           ensure_ragel_version
-STDOUT.puts "*** ragel #{flags} #{lang_ragel(machine)} -o #{target(machine)}", "*** #{Dir.pwd}"
-          sh "ragel #{flags} #{lang_ragel(machine)} -o #{target(machine)}"
+          f_in = lang_ragel(machine)
+          f_out = target(machine)
+          Dir.chdir(@rl_dir) do |d|
+            f_in = f_in.sub(/\A#{@rl_dir}\//, '')
+            f_out = "../#{f_out}"
+            sh "ragel #{flags} #{f_in} -o #{f_out}"
+          end
         end
         
         file extconf => [target(machine)] if lang == 'c'
