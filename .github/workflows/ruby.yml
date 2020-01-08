@@ -36,6 +36,11 @@ jobs:
         base:  update
         mingw: ragel
 
+    - name: PATH, ridk
+      if:   startsWith(matrix.os, 'windows')
+      run: |
+        Write-Host $env:PATH.replace(';', "`n")
+        ridk version
     - name: RubyGems, Bundler Update
       run:  gem update --system --no-document --conservative
     - name: bundle install
